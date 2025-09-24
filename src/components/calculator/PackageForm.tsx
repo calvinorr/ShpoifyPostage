@@ -19,70 +19,68 @@ export function PackageForm({ packageData, onChange }: PackageFormProps) {
   };
 
   return (
-    <div className="space-y-4">
-      <div className="grid grid-cols-3 gap-4">
-        <div className="space-y-2">
-          <Label htmlFor="length">Length (cm)</Label>
+    <div className="space-y-2">
+      <div className="grid grid-cols-2 gap-2">
+        <div>
+          <Label htmlFor="length" className="text-xs">Length (cm)</Label>
           <Input
             id="length"
             type="number"
             min="0"
             step="0.1"
             placeholder="0.0"
+            className="h-7 text-xs"
             value={packageData.length || ''}
             onChange={(e) => handleInputChange('length', e.target.value)}
           />
         </div>
-        <div className="space-y-2">
-          <Label htmlFor="width">Width (cm)</Label>
+        <div>
+          <Label htmlFor="width" className="text-xs">Width (cm)</Label>
           <Input
             id="width"
             type="number"
             min="0"
             step="0.1"
             placeholder="0.0"
+            className="h-7 text-xs"
             value={packageData.width || ''}
             onChange={(e) => handleInputChange('width', e.target.value)}
           />
         </div>
-        <div className="space-y-2">
-          <Label htmlFor="height">Height (cm)</Label>
+      </div>
+
+      <div className="grid grid-cols-2 gap-2">
+        <div>
+          <Label htmlFor="height" className="text-xs">Height (cm)</Label>
           <Input
             id="height"
             type="number"
             min="0"
             step="0.1"
             placeholder="0.0"
+            className="h-7 text-xs"
             value={packageData.height || ''}
             onChange={(e) => handleInputChange('height', e.target.value)}
           />
         </div>
-      </div>
-
-      <div className="space-y-2">
-        <Label htmlFor="weight">Weight (grams)</Label>
-        <Input
-          id="weight"
-          type="number"
-          min="0"
-          step="1"
-          placeholder="0"
-          value={packageData.weight || ''}
-          onChange={(e) => handleInputChange('weight', e.target.value)}
-        />
-        <p className="text-sm text-gray-500">
-          Enter weight in grams (e.g., 500g = 500)
-        </p>
-      </div>
-
-      {/* Package size guidance */}
-      <div className="mt-4 p-3 bg-blue-50 rounded-lg">
-        <h4 className="text-sm font-medium text-blue-900 mb-2">Royal Mail Size Limits</h4>
-        <div className="text-xs text-blue-700 space-y-1">
-          <p><strong>Small Parcel (≤2kg):</strong> Max 45cm × 35cm × 16cm</p>
-          <p><strong>Medium Parcel (≤20kg):</strong> Max 61cm × 46cm × 46cm</p>
-          <p><strong>Large Parcel (≤30kg):</strong> Max combined dimensions 150cm</p>
+        <div>
+          <Label htmlFor="weight" className="text-xs">Weight (g)</Label>
+          <Input
+            id="weight"
+            type="number"
+            min="0"
+            step="1"
+            placeholder="0"
+            className="h-7 text-xs"
+            value={packageData.weight || ''}
+            onChange={(e) => handleInputChange('weight', e.target.value)}
+          />
         </div>
+      </div>
+
+      {/* Compact size guidance */}
+      <div className="p-2 bg-blue-50 rounded text-xs">
+        <p className="text-blue-700"><strong>Small (≤2kg):</strong> 45×35×16cm</p>
       </div>
     </div>
   );

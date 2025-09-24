@@ -23,7 +23,7 @@ export function QuoteResults({ quotes, isLoading }: QuoteResultsProps) {
     return (
       <div className="text-center py-8 text-gray-500">
         <Package className="h-12 w-12 mx-auto mb-4 opacity-50" />
-        <p>Enter package details and click "Calculate Postage" to see shipping options</p>
+        <p>Enter package details and click &quot;Calculate Postage&quot; to see shipping options</p>
       </div>
     );
   }

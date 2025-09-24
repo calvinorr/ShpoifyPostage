@@ -1,6 +1,6 @@
 'use client';
 
-import { getAvailableDestinations } from '@/lib/calculator';
+import { CalculatorService } from '@/lib/calculatorService';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface DestinationSelectProps {
@@ -9,21 +9,17 @@ interface DestinationSelectProps {
 }
 
 export function DestinationSelect({ value, onChange }: DestinationSelectProps) {
-  const destinations = getAvailableDestinations();
+  const countries = CalculatorService.getAvailableCountries();
 
-  // Group destinations by region
-  const groupedDestinations = destinations.reduce((acc, dest) => {
-    if (!acc[dest.region]) {
-      acc[dest.region] = [];
+  // Group countries by zone
+  const groupedCountries = countries.reduce((acc, country) => {
+    const zoneKey = country.zone === 1 ? 'Europe (Zone 1)' : 'Rest of World (Zone 2)';
+    if (!acc[zoneKey]) {
+      acc[zoneKey] = [];
     }
-    acc[dest.region].push(dest);
+    acc[zoneKey].push(country);
     return acc;
-  }, {} as Record<string, typeof destinations>);
-
-  // Sort destinations within each region
-  Object.keys(groupedDestinations).forEach(region => {
-    groupedDestinations[region].sort((a, b) => a.name.localeCompare(b.name));
-  });
+  }, {} as Record<string, typeof countries>);
 
   return (
     <div className="space-y-2">
@@ -32,16 +28,16 @@ export function DestinationSelect({ value, onChange }: DestinationSelectProps) {
           <SelectValue placeholder="Select destination country" />
         </SelectTrigger>
         <SelectContent>
-          {Object.entries(groupedDestinations).map(([region, dests]) => (
-            <div key={region}>
+          {Object.entries(groupedCountries).map(([zone, countryList]) => (
+            <div key={zone}>
               <div className="px-2 py-1.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                {region}
+                {zone}
               </div>
-              {dests.map((dest) => (
-                <SelectItem key={dest.code} value={dest.code}>
+              {countryList.map((country) => (
+                <SelectItem key={country.code} value={country.code}>
                   <div className="flex items-center justify-between w-full">
-                    <span>{dest.name}</span>
-                    <span className="text-xs text-gray-400 ml-2">Zone {dest.zone}</span>
+                    <span>{country.name}</span>
+                    <span className="text-xs text-gray-400 ml-2">Zone {country.zone}</span>
                   </div>
                 </SelectItem>
               ))}
@@ -51,7 +47,7 @@ export function DestinationSelect({ value, onChange }: DestinationSelectProps) {
       </Select>
 
       <div className="mt-2 p-2 bg-gray-50 rounded text-xs text-gray-600">
-        <p><strong>Zones:</strong> Europe Zone 1 (nearby), Zone 2 (Eastern Europe), World Zone 1 (developed), Zone 2 (emerging), Zone 3 (developing)</p>
+        <p><strong>Zone 1:</strong> European countries with faster delivery. <strong>Zone 2:</strong> Rest of world destinations.</p>
       </div>
     </div>
   );

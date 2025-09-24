@@ -179,19 +179,19 @@ export function calculateShipping(
       const serviceKey = getServiceKey(service);
 
       // Safe lookups into pricing data
-      const servicePricing = (pricingData as any)[serviceKey];
+      const servicePricing = pricingData[serviceKey as keyof typeof pricingData];
       if (!servicePricing) {
         throw new Error(`Pricing not found for service: ${serviceKey}`);
       }
 
-      const zonePricing = servicePricing[zoneKey];
+      const zonePricing = servicePricing[zoneKey as keyof typeof servicePricing];
       if (!zonePricing) {
         throw new Error(
           `Pricing not found for zone: ${zoneKey} in service: ${serviceKey}`,
         );
       }
 
-      const price = zonePricing[weightBand];
+      const price = zonePricing[weightBand as keyof typeof zonePricing];
 
       // Explicit undefined check so zero-valued prices are treated as valid (if any)
       if (price === undefined) {

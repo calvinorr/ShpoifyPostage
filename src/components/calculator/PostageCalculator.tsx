@@ -94,7 +94,7 @@ export function PostageCalculator() {
             <CardHeader>
               <CardTitle>Destination</CardTitle>
               <CardDescription>
-                Select the country you're shipping to
+                Select the country you&apos;re shipping to
               </CardDescription>
             </CardHeader>
             <CardContent>

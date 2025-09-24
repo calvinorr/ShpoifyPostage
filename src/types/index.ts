@@ -35,11 +35,24 @@ export interface Destination {
   region: 'UK' | 'Europe' | 'World';
 }
 
+export interface DeliveryInfo {
+  estimatedDays: string; // Keep for backward compatibility
+  earliestDate?: Date;
+  latestDate?: Date;
+  estimatedDate?: Date;
+  businessDaysText?: string;
+  estimatedDateText?: string;
+  isGuaranteed?: boolean;
+  cutoffTime?: string;
+  processingDelay?: string;
+}
+
 export interface PriceQuote {
   service: ServiceOption;
   destination: Destination;
   price: number;
-  estimatedDays: string;
+  estimatedDays: string; // Keep for backward compatibility
+  delivery?: DeliveryInfo; // Enhanced delivery information
   available: boolean;
   restrictions?: string[];
 }

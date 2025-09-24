@@ -1,9 +1,9 @@
-import { PostageCalculator } from '@/components/calculator/PostageCalculator';
+import { PostageCalculatorModern } from '@/components/calculator/PostageCalculatorModern';
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-gray-50">
-      <PostageCalculator />
+    <div className="container mx-auto p-4 sm:p-6">
+      <PostageCalculatorModern />
     </div>
   );
 }
